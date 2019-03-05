@@ -6,7 +6,7 @@ MAINTAINER m4coding <m4coding@qq.com>
 
 
 # Install dependencies
-RUN apt-get update -y && apt-get install -y apt-file expect git wget python curl make maven
+RUN apt-get update -y && apt-get install -y apt-file expect git wget python curl make maven binutils
 RUN apt-file update -y
 RUN apt-get install -y software-properties-common
 RUN dpkg --add-architecture i386 && apt-get update -y && apt-get install -y --force-yes libc6-i386 libncurses5:i386 libstdc++6:i386 zlib1g:i386
