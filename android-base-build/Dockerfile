@@ -6,7 +6,7 @@ MAINTAINER m4coding <m4coding@qq.com>
 
 
 # Install dependencies
-RUN apt-get update -y && apt-get install -y apt-file expect git wget python curl make maven binutils pkg-config gcc
+RUN apt-get update -y && apt-get install -y apt-file expect git wget python curl make maven binutils pkg-config gcc build-essential autoconf libtool gperf gettext yasm python-lxml
 RUN apt-file update -y
 RUN apt-get install -y software-properties-common
 RUN dpkg --add-architecture i386 && apt-get update -y && apt-get install -y --force-yes libc6-i386 libncurses5:i386 libstdc++6:i386 zlib1g:i386
@@ -16,7 +16,7 @@ ENV JRE_HOME ${JAVA_HOME}/jre
 
 RUN wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
     -P /tmp \
-    https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60/jdk-8u201-linux-x64.tar.gz
+    https://github.com/frekele/oracle-java/releases/download/8u201-b09/jdk-8u201-linux-x64.tar.gz
 
 RUN cd /tmp && tar -zxvf jdk-8u201-linux-x64.tar.gz && \
     mkdir -p /usr/lib/jvm && mv /tmp/jdk1.8.0_201 "${JAVA_HOME}" && \
