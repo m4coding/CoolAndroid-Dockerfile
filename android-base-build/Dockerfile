@@ -11,6 +11,8 @@ RUN apt-file update -y
 RUN apt-get install -y software-properties-common
 RUN dpkg --add-architecture i386 && apt-get update -y && apt-get install -y --force-yes libc6-i386 libncurses5:i386 libstdc++6:i386 zlib1g:i386
 
+RUN apt-get install -y subversion ftp
+
 ENV JAVA_HOME /usr/lib/jvm/java-oracle
 ENV JRE_HOME ${JAVA_HOME}/jre
 
@@ -51,6 +53,14 @@ RUN ls -l /opt/tools
 
 # Install Android SDK components
 RUN cd /opt/android-sdk && cp -a tools copy-tools && sh /opt/tools/expect-android-update.sh platform-tools,build-tools-23.0.3,build-tools-24.0.3,build-tools-25.0.3,android-21,android-22,android-23,android-24,android-25,extra-android-support,extra-android-m2repository,extra-google-m2repository,extra-google-google_play_services && rm -rf temp
+
+# Update sdkmanager and accept licenses
+RUN sh /opt/tools/accept-android-sdk-licenses.sh
+
+# Install gradle
+ENV GRADLE_HOME /opt/gradle
+RUN cd /opt && wget -O gradle-5.1.1-bin.zip -q https://downloads.gradle-dn.com/distributions/gradle-5.1.1-bin.zip && unzip -q gradle-5.1.1-bin.zip && rm -f gradle-5.1.1-bin.zip && ln -sf /opt/gradle-5.1.1 /opt/gradle
+ENV PATH ${PATH}:${GRADLE_HOME}/bin
 
 # Check
 #RUN which adb
