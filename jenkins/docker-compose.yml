@@ -1,0 +1,15 @@
+jenkins:
+  image: jenkins/jenkins:lts
+  volumes:
+    - E:\work\jenkins:/var/jenkins_home
+  ports:
+    - "8029:8080"
+  expose:
+    - "8080"
+    - "50000"
+  privileged: true
+  user: root
+  restart: always
+  container_name: jenkins
+  environment:
+    JAVA_OPTS: '-Djava.util.logging.config.file=/var/jenkins_home/log.properties'
