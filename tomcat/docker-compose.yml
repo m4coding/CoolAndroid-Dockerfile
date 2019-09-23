@@ -1,0 +1,10 @@
+mytomcat:
+  image: tomcat
+  volumes:
+    - E:\work\GoServer\tomcat\webapps:/usr/local/tomcat/webapps/
+  ports:
+    - "8080:8080"
+  expose:
+    - "8080"
+  restart: always
+  container_name: tomcat
